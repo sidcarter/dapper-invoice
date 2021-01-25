@@ -1,0 +1,66 @@
+\documentclass[letterpaper]{dapper-invoice}
+%\documentclass[letterpaper,currency=dollar]{dapper-invoice}
+%\documentclass[letterpaper,currency=euro]{dapper-invoice}
+%\documentclass[letterpaper,currency=pound]{dapper-invoice}
+
+\newcommand{\invoiceNo}{0042}
+\newcommand{\balance}{2400.00}
+\newcommand{\duein}{7}% days
+
+\newcommand{\me}{Khader Syed}
+\newcommand{\clientName}{Heartland Surgical Inc.}
+
+\setmetadata{\me}{Chapter63 LLC}{\invoiceNo}{\clientName}
+
+\defaultfontfeatures{ Path = ./Fonts/ }
+\usepackage{fontawesome}
+
+\begin{document}
+
+\newfontface\mainLightItalic{OpenSans-LightItalic}
+\makeheader{Chapter63\ \mainLightItalic LLC}{\invoiceNo}
+
+\twocolumnlayout{
+    \begin{infoSection}
+        \infoBox{Client}{\clientName \\
+            90 Wildwood Dr. \\
+            Westwood, MA 02090 }
+        \infoBox{Contact}{Dwight Meglan}
+        \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{dmeglan@gmail.com}}
+        \noalign{\addvspace{8ex}}
+        \infoBox{}{
+        {\large\raisebox{.55\height}\currencysym\huge\formatcurrency{\balance} \arrowbase} \\
+        {\small\color{subduedColor} due \duedate{\duein}}
+        }
+    \end{infoSection}
+}{
+    \begin{infoSection}
+        \infoBox{\arrowtarget Payable To}{
+            \me \\
+            PO Box 172 \\
+            Callicoon, NY 12723
+        }
+        \infoSub{\faMobilePhone}{\small\slshape +1~(786)~329-3480}
+        \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{sid@chapter63.com}}
+    \end{infoSection}
+}
+
+\drawarrow
+
+\addvspace{4ex}
+
+\begin{hoursItemizationWithProject}
+
+\lineitemp{08/16/2020}{8}{300}{Docker}{
+    \item Technical consulting for period between 6/16/2020 and 8/14/2020}
+
+\beginsummary
+
+\summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
+
+\summaryline{Paid}{\currencysym\formatcurrency{00}}
+\summaryline{Balance Due}{\currencysym\formatcurrency{\balance}} % not really any math support (yet)
+
+\end{hoursItemizationWithProject}
+
+\end{document}
